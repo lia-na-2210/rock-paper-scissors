@@ -1,7 +1,22 @@
 const choices = ['rock', 'paper', 'scissors']
 
 function game(){
-    playRound()
+    let playerScore = 0
+    let compuScore = 0
+
+    for (let i = 0; i < 5; i++ ) {
+        let winner = playRound()
+        if (winner == 'player') {
+            playerScore += 1
+            console.log('The player won!')
+        } else if (winner == 'compu') {
+            compuScore += 1
+            console.log('The computer won!')
+        } else {
+            console.log("It's a tie!")
+        }
+    }
+    console.log(`The player won ${playerScore} times and the computer ${compuScore}`)
 }
 
 function playRound () {
@@ -10,21 +25,21 @@ function playRound () {
     console.log(playerChoice)
     console.log(computerChoice)
     const winner = checkWinner(playerChoice, computerChoice);
-    console.log(winner)
+    return winner
     
 }
 
 function checkWinner(player, compu) {
     if (player == compu) {
-        return('It is a tie');
+        return('tie');
     } else if (player == 'paper' && compu == 'rock') {
-        return('The player won!')
+        return('player')
     } else if (player == 'scissors' && compu == 'paper') {
-        return('The player won!')
+        return('player')
     } else if (player == 'rock' && compu == 'scissors') {
-        return('The player won!')
+        return('player')
     } else {
-        return('The computer won!')
+        return('compu')
     }
 }
 
