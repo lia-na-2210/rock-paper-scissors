@@ -1,10 +1,25 @@
 const choices = ['rock', 'paper', 'scissors']
+const buttons = document.getElementById('btn-pick')
+
+document.addEventListener('click', (e) => {
+    let pick = e.target.innerText
+    console.log(pick)
+});
+
+
+
+/*btnArray.forEach(button => button.addEventListener('click', () => {
+    let playerPick = button.innerText
+    console.log(playerPick)
+}))*/
+
+
 
 function game(){
     let playerScore = 0
     let compuScore = 0
 
-    for (let i = 0; i < 5; i++ ) {
+    /*for (let i = 0; i < 5; i++ ) {
         let winner = playRound()
         if (winner == 'player') {
             playerScore += 1
@@ -15,7 +30,7 @@ function game(){
         } else {
             console.log("It's a tie!")
         }
-    }
+    }*/
     console.log(`The player won ${playerScore} times and the computer ${compuScore}`)
 }
 
@@ -49,15 +64,16 @@ function getComputerChoice () {
 }
 
 
-function getPlayerChoice() {
-    let input = prompt('Pick rock, paper or scissors: ')
+/*function getPlayerChoice(pick) { 
+    
+    /*let input = prompt('Pick rock, paper or scissors: ')
     while (input == null) {
         input = prompt('Pick rock, paper or scissors: ')
     }
     input = input.toLowerCase()
-    let check = validateChoice(input)
+    let check = validateChoice(input)*/
     /*console.log(check)*/
-    while (check == false) {
+    /*while (check == false) {
         input = prompt('You can only type rock, paper or scissors, so pick: ')
         while (input == null) {
             input = prompt('Pick rock, paper or scissors: ')
@@ -65,8 +81,9 @@ function getPlayerChoice() {
         input = input.toLowerCase()
         check = validateChoice(input)
     }
-    return input
-}
+    console.log(playerPick)
+    return playerPick
+}*/
 
 function validateChoice(choice) {
     return choices.includes(choice)
