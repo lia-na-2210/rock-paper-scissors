@@ -3,8 +3,11 @@ const buttons = document.getElementsByClassName('btn-pick');
 const plyChoice = document.getElementById('ply-choice');
 const comChoice = document.getElementById('com-choice');
 const playBtn = document.getElementById('btn-play');
+const playerPoints = document.getElementById('player-score');
+const compuPoints = document.getElementById('computer-score');
 
-
+let playerScore = 0;
+let compuScore = 0;
 
 for (i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', playerChoice);
@@ -20,26 +23,31 @@ function playerChoice(obj) {
 function game(winner){
     let winnerText = document.getElementById('winner');
 
-    let playerScore = 0;
-    let compuScore = 0;
-    
-
-    if (winner == 'player') {
-        playerScore += 1;
-        winnerText.innerText = 'The player won!';
-    } else if (winner == 'compu') {
-        compuScore += 1;
-        winnerText.innerText = 'The computer won!';
+    if (playerScore == 5) {
+        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Well played!`
+        playerScore = 0;
+        compuScore = 0;
+        playerPoints.innerText = '';
+        compuPoints.innerText = '';
+    } else if (compuScore == 5) {
+        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Try again!`
+        playerScore = 0;
+        compuScore = 0;
+        playerPoints.innerText = '';
+        compuPoints.innerText = '';
     } else {
-        winnerText.innerText = "It's a tie!";
+        if (winner == 'player') {
+            playerScore += 1;
+            playerPoints.innerText = (`Your score is: ${playerScore}`);
+            winnerText.innerText = 'The player won!';
+        } else if (winner == 'compu') {
+            compuScore += 1;
+            compuPoints.innerText = (`The computer is: ${compuScore}`);
+            winnerText.innerText = 'The computer won!';
+        } else {
+            winnerText.innerText = "It's a tie!";
+        }
     }
-    
-    console.log(playerScore, compuScore);
-
-    /*let playerPoints = document.getElementById('player-score');
-    playerPoints.innerText += playerScore;
-    let compuPoints = document.getElementById('computer-score');
-    compuPoints.innerText += compuScore;*/
     
 }
 
