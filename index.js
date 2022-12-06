@@ -19,6 +19,7 @@ function playerChoice(obj) {
     //console.log(playerPick)
     plyChoice.innerText = playerPick;
     comChoice.innerText = '';
+    return true;
 }
 
 
@@ -30,7 +31,7 @@ function game(winner){
         winnerText.innerText = 'The player won!';
     } else if (winner == 'compu') {
         compuScore += 1;
-        compuPoints.innerText = (`The computer is: ${compuScore}`);
+        compuPoints.innerText = (`The computer score is: ${compuScore}`);
         winnerText.innerText = 'The computer won!';
     } else {
         winnerText.innerText = "It's a tie!";
@@ -51,8 +52,6 @@ function playRound (player) {
 }
 
 function checkWinner(p, c) {
-    //console.log(p);
-    //console.log(c);
     if (p == c) {
         return('tie');
     } else if (p == 'Paper' && c == 'Rock') {
@@ -74,13 +73,13 @@ function getComputerChoice () {
 function checkScore(playerScore,compuScore){
 
     if (playerScore == 5) {
-        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Well played!`
+        winnerText.innerText = `You won ${playerScore} times and the computer ${compuScore} times. Well played!`
         playerScore = 0;
         compuScore = 0;
         playerPoints.innerText = '';
         compuPoints.innerText = '';
     } else if (compuScore == 5) {
-        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Try again!`
+        winnerText.innerText = `The computer won ${compuScore}, you only won ${playerScore}, you lost.`
         playerScore = 0;
         compuScore = 0;
         playerPoints.innerText = '';
@@ -91,5 +90,10 @@ function checkScore(playerScore,compuScore){
 }
 
 playBtn.addEventListener('click', function () {
-    playRound();
+    if (plyChoice.innerText.length === 0) {
+        return;
+    } else {
+        playRound();
+    }
+
 });
