@@ -5,6 +5,7 @@ const comChoice = document.getElementById('com-choice');
 const playBtn = document.getElementById('btn-play');
 const playerPoints = document.getElementById('player-score');
 const compuPoints = document.getElementById('computer-score');
+const winnerText = document.getElementById('winner');
 
 let playerScore = 0;
 let compuScore = 0;
@@ -17,38 +18,25 @@ function playerChoice(obj) {
     let playerPick = obj.target.innerText;
     //console.log(playerPick)
     plyChoice.innerText = playerPick;
+    comChoice.innerText = '';
 }
 
 
 function game(winner){
-    let winnerText = document.getElementById('winner');
 
-    if (playerScore == 5) {
-        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Well played!`
-        playerScore = 0;
-        compuScore = 0;
-        playerPoints.innerText = '';
-        compuPoints.innerText = '';
-    } else if (compuScore == 5) {
-        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Try again!`
-        playerScore = 0;
-        compuScore = 0;
-        playerPoints.innerText = '';
-        compuPoints.innerText = '';
+    if (winner == 'player') {
+        playerScore += 1;
+        playerPoints.innerText = (`Your score is: ${playerScore}`);
+        winnerText.innerText = 'The player won!';
+    } else if (winner == 'compu') {
+        compuScore += 1;
+        compuPoints.innerText = (`The computer is: ${compuScore}`);
+        winnerText.innerText = 'The computer won!';
     } else {
-        if (winner == 'player') {
-            playerScore += 1;
-            playerPoints.innerText = (`Your score is: ${playerScore}`);
-            winnerText.innerText = 'The player won!';
-        } else if (winner == 'compu') {
-            compuScore += 1;
-            compuPoints.innerText = (`The computer is: ${compuScore}`);
-            winnerText.innerText = 'The computer won!';
-        } else {
-            winnerText.innerText = "It's a tie!";
-        }
+        winnerText.innerText = "It's a tie!";
     }
-    
+
+    checkScore(playerScore,compuScore);
 }
 
 function playRound (player) {
@@ -57,14 +45,14 @@ function playRound (player) {
     comChoice.innerText = computerPick;
 
     const winner = checkWinner(playerPick, computerPick);
-    console.log(winner);
+    //console.log(winner);
     game(winner);
     
 }
 
 function checkWinner(p, c) {
-    console.log(p);
-    console.log(c);
+    //console.log(p);
+    //console.log(c);
     if (p == c) {
         return('tie');
     } else if (p == 'Paper' && c == 'Rock') {
@@ -81,6 +69,25 @@ function checkWinner(p, c) {
 function getComputerChoice () {
     return choices[Math.floor(Math.random()*choices.length)];
     
+}
+
+function checkScore(playerScore,compuScore){
+
+    if (playerScore == 5) {
+        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Well played!`
+        playerScore = 0;
+        compuScore = 0;
+        playerPoints.innerText = '';
+        compuPoints.innerText = '';
+    } else if (compuScore == 5) {
+        winnerText.innerText = `The player has won ${playerScore} and the computer ${compuScore}. Try again!`
+        playerScore = 0;
+        compuScore = 0;
+        playerPoints.innerText = '';
+        compuPoints.innerText = '';
+    } else {
+        return
+    }
 }
 
 playBtn.addEventListener('click', function () {
